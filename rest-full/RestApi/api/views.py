@@ -5,6 +5,9 @@ from .serializers import BlogSerializer
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 
+
+
+
 class BlogList(ListCreateAPIView):
     queryset = Article.objects.all()
     serializer_class = BlogSerializer
