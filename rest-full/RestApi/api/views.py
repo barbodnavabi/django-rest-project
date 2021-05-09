@@ -11,7 +11,7 @@ class BlogList(ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
 
-class BlogDetail(RetrieveAPIView):
+class BlogDetail(RetrieveUpdateDestroyAPIView):
     model=Article
     serializer_class = BlogSerializer
     permission_classes = [IsAuthenticated]

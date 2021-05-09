@@ -15,9 +15,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'Blog',
     'api',
-    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -35,7 +41,7 @@ ROOT_URLCONF = 'RestApi.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,8 +84,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     ]
 }
+
+SITE_ID = 1
+REST_USE_JWT = True
+JWT_AUTH_COOKIE = 'account-access'
+JWT_AUTH_REFRESH_COOKIE = 'rest-refresh-token'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
