@@ -9,10 +9,15 @@ from .permissions import IsStaffOrReadOnly,IsAuthorOrReadOnly
 
 
 
-# class BlogList(ListCreateAPIView):
-#     queryset = Article.objects.all()
-#     serializer_class = BlogSerializer
-#     permission_classes = [IsAuthenticated]
+class BlogList(ListCreateAPIView):
+    queryset = Article.objects.all()
+    serializer_class = BlogSerializer
+    permission_classes = [IsAuthenticated]
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+        return super().perform_create(serializer)
+        
 
 
 # class BlogDetail(RetrieveUpdateDestroyAPIView):
